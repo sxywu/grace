@@ -1,4 +1,3 @@
-const wiki = require('wikijs').default
 const fs = require('fs')
 const _ = require('lodash')
 const https = require('https')
@@ -33,45 +32,10 @@ function getPages(url) {
         // if there's still urls left, then get that category page
         getPages(urls.shift())
       } else {
-        getDetails(allNames)
+        fs.writeFileSync('./data/names.json', JSON.stringify(allNames), {encoding: 'utf8'})
       }
     })
   })
-}
-
-const data = []
-let index = 0
-function getDetails(names) {
-  const name = names[index]
-  wiki().page(name)
-    .then(page => {
-      Promise.all([
-        page.backlinks(),
-        page.references(),
-        page.fullInfo(),
-        page.links(),
-        page.summary(),
-        page.mainImage(),
-      ]).then(([backlinks, references, info, links, summary, mainImage]) => {
-        data.push({
-          url: page.fullurl,
-          name,
-          backlinks,
-          references,
-          info,
-          links,
-          summary,
-          mainImage,
-        })
-
-        console.log(`writing ${name}`)
-        fs.writeFileSync('./data/data.json', JSON.stringify(data), {encoding: 'utf8'})
-        if (index < names.length) {
-          index += 1
-          getDetails(names)
-        }
-      })
-    })
 }
 
 getPages(urls.shift())
