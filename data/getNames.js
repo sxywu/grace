@@ -9,7 +9,8 @@ const {JSDOM} = require('jsdom')
 
 const urls = [
   'https://en.wikipedia.org/wiki/Category:Women_computer_scientists',
-  'https://en.wikipedia.org/w/index.php?title=Category:Women_computer_scientists&pagefrom=Joseph%2C+Deborah%0ADeborah+Joseph#mw-pages'
+  'https://en.wikipedia.org/w/index.php?title=Category:Women_computer_scientists&pagefrom=Joseph%2C+Deborah%0ADeborah+Joseph#mw-pages',
+  'https://en.wikipedia.org/w/index.php?title=Category:Women_computer_scientists&pagefrom=Windsor%2C+Edith%0AEdith+Windsor#mw-pages',
 ]
 
 const allNames = []
