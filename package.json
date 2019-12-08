@@ -10,8 +10,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "d3": "^5.14.2",
     "jsdom": "^15.2.0",
     "lodash": "^4.17.15",
+    "vue": "^2.6.10",
+    "vue-hot-reload-api": "^2.3.4",
     "wikijs": "^6.0.1"
+  },
+  "devDependencies": {
+    "@vue/component-compiler-utils": "^3.0.2",
+    "vue-template-compiler": "^2.6.10"
   }
 }
