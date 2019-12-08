@@ -1,0 +1,162 @@
+[
+  {
+    "name": "Nicole-Reine Lepaute",
+    "url": "https://en.wikipedia.org/wiki/Nicole-Reine_Lepaute",
+    "year": 1758,
+    "fields": "Astronomer, mathematician",
+    "shortSummary": "Predicted the return of Halley's Comet by calculating the timing of a solar eclipse",
+    "summary": "Nicole-Reine Lepaute, was a French astronomer and mathematician. Lepaute predicted the return of Halley's Comet by calculating the timing of a solar eclipse and constructing a group of catalogs for the stars."
+  },
+  {
+    "name": "Ada Lovelace",
+    "url": "https://en.wikipedia.org/wiki/Ada_Lovelace",
+    "year": 1840,
+    "fields": "Mathematician, writer",
+    "shortSummary": "First person to publish an algorithm intended for the first modern computer.",
+    "summary": "Augusta Ada King, Countess of Lovelace was an English mathematician and writer, chiefly known for her work on Charles Babbage's proposed mechanical general-purpose computer, the Analytical Engine."
+  },
+  {
+    "name": "Adele Goldstine",
+    "url": "https://en.wikipedia.org/wiki/Adele_Goldstine",
+    "year": 1944,
+    "fields": "Mathmatician, computer programmer",
+    "shortSummary": "Wrote the manual for the first electronic digital computer, ENIAC.",
+    "summary": "Adele Goldstine was an American mathematician and computer programmer. She wrote the manual for the first electronic digital computer, ENIAC."
+  },
+  {
+    "name": "Barbara Paulson",
+    "url": "https://en.wikipedia.org/wiki/Barbara_Paulson",
+    "year": 1948,
+    "fields": "Human computer",
+    "shortSummary": "One of the first women scientists at NASA's JPL, calculated rocket trajectories by hand.",
+    "summary": "Barbara Jean Paulson is an American former human computer at NASA's Jet Propulsion Laboratory and one of the first women scientists employed there. Paulson began working as a mathematician at JPL in 1948, where she calculated rocket trajectories by hand. She is among the women who made early progress at JPL."
+  },
+  {
+    "name": "Kathleen Booth",
+    "url": "https://en.wikipedia.org/wiki/Kathleen_Booth",
+    "year": 1949,
+    "fields": "Computer scientist",
+    "shortSummary": "Invented the first assembly language.",
+    "summary": "Kathleen Booth wrote the first assembly language and designed the assembler and autocode for the first computer systems at Birkbeck College, University of London. She helped design three different machines including the ARC, SEC, and APE(X)C."
+  },
+  {
+    "name": "Katherine Johnson",
+    "url": "https://en.wikipedia.org/wiki/Katherine_Johnson",
+    "year": 1958,
+    "fields": "Mathematician",
+    "shortSummary": "Calculated trajectories, launch windows and emergency return paths critical to the success of the first and subsequent U.S. crewed spaceflights.",
+    "summary": "Katherine Coleman Goble Johnson is an American mathematician whose calculations of orbital mechanics as a NASA employee were critical to the success of the first and subsequent U.S. crewed spaceflights."
+  },
+  {
+    "name": "Margaret Hamilton (scientist)",
+    "url": "https://en.wikipedia.org/wiki/Margaret_Hamilton_(software_engineer)",
+    "year": 1965,
+    "fields": "Computer scientist, systems engineer, business owner",
+    "shortSummary": "Programmed the onboard flight software for NASA's Apollo Moon mission computers.",
+    "summary": "Margaret Heafield Hamilton is an American computer scientist, systems engineer and business owner. She was director of the Software Engineering Division of the MIT Instrumentation Laboratory, which developed on-board flight software for NASA's Apollo space program."
+  },
+  {
+    "name": "Erna Schneider Hoover",
+    "url": "https://en.wikipedia.org/wiki/Erna_Schneider_Hoover",
+    "year": 1971,
+    "fields": "Mathematician",
+    "shortSummary": "Invented a computerized telephone switching method that replaced switchboards and \"revolutionized modern communication\".",
+    "summary": "Dr. Erna Schneider Hoover is an American mathematician notable for inventing a computerized telephone switching method which \"revolutionized modern communication\" according to several reports."
+  },
+  {
+    "name": "Jude Milhon",
+    "url": "https://en.wikipedia.org/wiki/Jude_Milhon",
+    "year": 1973,
+    "fields": "Hacker, author",
+    "shortSummary": "Coined the term cypherpunk and maintained Community Memory, the first public computerized bulletin board system.",
+    "summary": "Judith [Jude] Milhon, in Washington D.C., best known by her pseudonym St. Jude, was a hacker and author in the San Francisco Bay Area.\nMilhon coined the term cypherpunk and was a founding member of the cypherpunks. On July 19, 2003, Milhon died of cancer."
+  },
+  {
+    "name": "Carol Shaw",
+    "url": "https://en.wikipedia.org/wiki/Carol_Shaw",
+    "year": 1980,
+    "fields": "Video game designer and programmer",
+    "shortSummary": "Considered to the first modern female games designer, released a 3D version of tic-tac-toe for the Atari 2600.",
+    "summary": ""
+  },
+  {
+    "name": "Roberta Williams",
+    "url": "https://en.wikipedia.org/wiki/Roberta_Williams",
+    "year": 1980,
+    "fields": "Video game designer, writer, co-founder",
+    "shortSummary": "Pioneered the graphic adventure game format in Mystery House and the King's Quest series.",
+    "summary": "Roberta Williams is an American video game designer, writer, and a co-founder of Sierra On-Line, who developed her first game while living in Simi Valley, California."
+  },
+  {
+    "name": "Susan Kare",
+    "url": "https://en.wikipedia.org/wiki/Susan_Kare",
+    "year": 1984,
+    "fields": "Artist, graphic designer",
+    "shortSummary": "Designed the original icons for the Macintosh, including the moving watch, paintbrush and trash can.",
+    "summary": "Susan Kare is an artist and graphic designer best known for her interface elements and typeface contributions to the first Apple Macintosh in the 1980s."
+  },
+  {
+    "name": "Radia Perlman",
+    "url": "https://en.wikipedia.org/wiki/Radia_Perlman",
+    "year": 1985,
+    "fields": "Computer programmer, network engineer",
+    "shortSummary": "Came up with a way to route information packets in an \"infinitely scalable\" way that allowed large networks like the Internet to function.",
+    "summary": "Radia Joy Perlman (born 1951) is an American computer programmer and network engineer. She is most famous for her invention of the spanning-tree protocol (STP), which is fundamental to the operation of network bridges, while working for Digital Equipment Corporation. She also made large contributions to many other areas of network design and standardization, such as link-state routing protocols.\n\nMore recently she has invented the TRILL protocol to correct some of the shortcomings of spanning-trees. She is currently employed by Dell EMC."
+  },
+  {
+    "name": "Jaime Levy",
+    "url": "https://en.wikipedia.org/wiki/Jaime_Levy",
+    "year": 1990,
+    "fields": "Author, lecturer, interace designer, user experience strategist",
+    "shortSummary": "Created one of the first e-Zines, CyberRag, which included articles, games and animations loaded onto diskettes.",
+    "summary": "Jaime Levy is an American author, lecturer, interface designer, and user experience strategist. She first became known for her new media projects in the 1990s."
+  },
+  {
+    "name": "Nancy Hafkin",
+    "url": "https://en.wikipedia.org/wiki/Nancy_Hafkin",
+    "year": 1990,
+    "fields": "",
+    "shortSummary": "Worked on networking and enabling email connections in 10 African countries.",
+    "summary": "Nancy Hafkin is a pioneer of networking and development information and electronic communications in Africa, spurring the Pan African Development Information System of the United Nations Economic Commission for Africa from 1987 until 1997."
+  },
+  {
+    "name": "Hu Qiheng",
+    "url": "https://en.wikipedia.org/wiki/Hu_Qiheng",
+    "year": 1994,
+    "fields": "Computer scientist",
+    "shortSummary": "Leader of the team who installed the first TCP/IP connection for China",
+    "summary": "Hu Qiheng is a Chinese computer scientist. Hu was the vice president of the Chinese Academy of Sciences from 1987 to 1996 and led the National Computing and Networking Facility of China which connected China to the Internet in April 1994. Hu was inducted into the Internet Hall of Fame in 2013 as a global connector."
+  },
+  {
+    "name": "Lucy Sanders",
+    "url": "https://en.wikipedia.org/wiki/Lucy_Sanders",
+    "year": 2004,
+    "fields": "CEO",
+    "shortSummary": "Founded the National Center for Women & Information Technology to address the gender gap in computing.",
+    "summary": "Lucinda \"Lucy\" Sanders is the current CEO and a co-founder of the National Center for Women &amp; Information Technology. She is the recipient of many distinguished honors in the STEM fields, including induction into the US News STEM Leadership Hall of Fame in 2013."
+  },
+  {
+    "name": "Coraline Ada Ehmke",
+    "url": "https://en.wikipedia.org/wiki/Coraline_Ada_Ehmke",
+    "year": 2014,
+    "fields": "Software developer, open source advocate",
+    "shortSummary": "Drafted the Contributor Covenant to bring inclusion to the world of open source project development.",
+    "summary": "Coraline Ada Ehmke is a software developer and open source advocate based in Chicago, Illinois. She began her career as a web developer in 1994 and has worked in a variety of industries, including engineering, consulting, education, advertising, healthcare, and software development infrastructure."
+  },
+  {
+    "name": "Mary Lou Jepsen",
+    "url": "https://en.wikipedia.org/wiki/Mary_Lou_Jepsen",
+    "year": 2005,
+    "fields": "technical executive, inventor",
+    "shortSummary": "Prolific inventor in the fields of display, imaging, and computer hardware, and the co-founder and CTO of One Laptop Per Child",
+    "summary": "Mary Lou Jepsen is a technical executive and inventor in the fields of display, imaging, and computer hardware. Her contributions have had worldwide adoption in head-mounted display, HDTV, laptop computers, and projector products; she was the technical force behind a generation of low-cost computing, and innovative consumer and medical imaging technologies."
+  },
+  {
+    "name": "Grace Hopper",
+    "url": "https://en.wikipedia.org/wiki/Grace_Hopper",
+    "year": 1949,
+    "fields": "Computer scientist, United States Navy rear admiral",
+    "shortSummary": "First person to design a compiler for a programming language.",
+    "summary": ""
+  }
+]
