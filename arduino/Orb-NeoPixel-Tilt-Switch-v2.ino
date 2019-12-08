@@ -1,29 +1,30 @@
 #include <Adafruit_NeoPixel.h>
 
 // use #define for read-only integers to save memory
-#define numOrbs 5 // UPDATE to number of orbs
-#define numGroups 2 // UPDATE to number of groups/categories
+#define numOrbs 3 // UPDATE to number of orbs
+#define numGroups 3 // UPDATE to number of groups/categories
 #define maxOrbsPerGroup 5 // UPDATE
 #define initialBrightness 10
 #define maxBrightness 255
 #define addBrightness 10
-#define debounce 500 // if switch reading is unstable, only keep the reading if it stays constant for >50 secs
+#define debounce 500 // if switch reading is unstable, only keep the reading if it stays constant for >500 mil
 #define duration 3000 // fade animation duration
 #define stagger 200
 // read-only arrays
-const int outputPins[numOrbs] = {3, 5, 6, 9}; // array of pin numbers for LED/neopixels
-const int inputPins[numOrbs] = {11}; // array of pin numbers for tilt switches
+const int outputPins[numOrbs] = {3, 5, 6}; // array of pin numbers for LED/neopixels
+const int inputPins[numOrbs] = {11, 10, 9}; // array of pin numbers for tilt switches
 const int groups[numGroups][maxOrbsPerGroup] = {
-  {0, 1, 3}, // group one with index of orbs that belong to it
-  {2}
+  {0}, // group one with index of orbs that belong to it // numbers assigned to each woman
+  {1}, // group number two - assigned numbers of each woman
+  {2} // group number two - assigned numbers of each woman
 };
 int orbToGroup[numOrbs][2]; // this array will be created in setup so we can look up what group an orb belongs to, and what index within that group
 
 // arrays that will be modified as the installation goes on
-unsigned long currentTime = 0;
+unsigned long currentTime = 0; // like int, but allows for higher value memory // ask someone who is good with Arduino // whether we need to reset over time
 Adafruit_NeoPixel neopixels[numOrbs];
 int neutralBrightnesses[numOrbs]; // keep track of pin brightness
-unsigned long switchStates[numOrbs][2]; // [value, prevTime, prevDebounceValue]
+unsigned long switchStates[numOrbs][3]; // [value, prevTime, prevDebounceValue]
 unsigned long lightStates[numOrbs][3]; // [startBrightness, endBrightness, startTime]
 unsigned long groupStates[numGroups][3]; // keep track of which group is getting lit up: [0 or 1, startTime, activeOrb]
 
@@ -68,7 +69,7 @@ void loop() {
 }
 
 void readSwitches() {
-  for (byte i = 0; i < 1; i += 1) { // TODO: CHANGE BACK TO numOrbs
+  for (byte i = 0; i < numOrbs; i += 1) { // TODO: CHANGE BACK TO numOrbs
     // READ switch states
     int value = !digitalRead(inputPins[i]);
     int prevValue = switchStates[i][0];
