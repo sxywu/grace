@@ -7,7 +7,7 @@
 #define initialBrightness 10
 #define maxBrightness 255
 #define addBrightness 1
-#define debounce 500 // if switch reading is unstable, only keep the reading if it stays constant for >50 secs
+#define debounce 500 // if switch reading is unstable, only keep the reading if it stays constant for >500 ms
 #define duration 1000 // fade animation duration
 #define stagger 500
 // read-only arrays
