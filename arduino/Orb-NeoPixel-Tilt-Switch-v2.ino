@@ -1,7 +1,7 @@
 #include <Adafruit_NeoPixel.h>
 
 // use #define for read-only integers to save memory
-#define numOrbs 5 // UPDATE to number of orbs
+#define numOrbs 3 // UPDATE to number of orbs
 #define numGroups 3 // UPDATE to number of groups/categories
 #define maxOrbsPerGroup 5 // UPDATE
 #define initialBrightness 10
@@ -11,17 +11,17 @@
 #define duration 1000 // fade animation duration
 #define stagger 500
 // read-only arrays
-const int outputPins[numOrbs] = {3, 5, 6, 9}; // array of pin numbers for LED/neopixels // ASSUMES FIRST IS GLOWING INSTRUCTION ORB
-const int inputPins[numOrbs] = {11}; // array of pin numbers for tilt switches // ASSUMES FIRST IS GLOWING INSTRUCTION ORB
+const int outputPins[numOrbs] = {3, 5, 6}; // array of pin numbers for LED/neopixels // ASSUMES FIRST IS GLOWING INSTRUCTION ORB
+const int inputPins[numOrbs] = {11, 10, 9}; // array of pin numbers for tilt switches // ASSUMES FIRST IS GLOWING INSTRUCTION ORB
 const int groups[numGroups][maxOrbsPerGroup] = {
   {0}, // FIRST GROUP IS ONLY GLOWING INSTRUCTION ORB DO NOT ADD ANY OTHER ORBS
-  {2, 3}, // group one with index of orbs that belong to it
-  {1}
+  {1}, // group one with index of orbs that belong to it
+  {2}
 };
 int orbToGroup[numOrbs][2]; // this array will be created in setup so we can look up what group an orb belongs to, and what index within that group
 
 // arrays that will be modified as the installation goes on
-unsigned long currentTime = 0;
+unsigned long currentTime = 0; // like int, but allows for higher value memory // ask someone who is good with Arduino // whether we need to reset over time
 Adafruit_NeoPixel neopixels[numOrbs];
 int neutralBrightnesses[numOrbs]; // keep track of pin brightness
 unsigned long switchStates[numOrbs][3]; // [value, prevTime, prevDebounceValue]
@@ -69,7 +69,7 @@ void loop() {
 }
 
 void readSwitches() {
-  for (byte i = 0; i < 1; i += 1) { // TODO: CHANGE BACK TO numOrbs
+  for (byte i = 0; i < numOrbs; i += 1) {
     // READ switch states
     int value = !digitalRead(inputPins[i]);
     int prevValue = switchStates[i][0];
