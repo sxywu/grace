@@ -4,13 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "parcel index.html",
+    "predeploy": "rm -rf dist && parcel build index.html --public-url /grace",
+    "deploy": "gh-pages -d dist"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "d3": "^5.14.2",
+    "d3-random": "^2.0.1",
     "jsdom": "^15.2.0",
     "lodash": "^4.17.15",
     "p5": "^0.10.2",
@@ -20,6 +24,7 @@
   },
   "devDependencies": {
     "@vue/component-compiler-utils": "^3.0.2",
+    "cssnano": "^4.1.10",
     "vue-template-compiler": "^2.6.10"
   }
 }
