@@ -104,8 +104,6 @@ void readSwitches() {
 
     // set prevDebounceValue to the reading
     switchStates[i][2] = value;
-
-      Serial.println(switchStates[i][0]);
   }
 }
 
