@@ -113,30 +113,4 @@ export default {
   top: 0;
   left: 0;
 }
-
-svg {
-  overflow: visible;
-}
-
-.labels {
-  position: absolute;
-  top: 0;
-  height: 100vh;
-}
-
-.beforeAfter {
-  position: absolute;
-  top: 50%;
-  padding: 40px;
-  width: calc(100vw - 80px);
-  text-align: center;
-  transform: translate(0, -50%);
-}
-
-.label {
-  position: absolute;
-  transform: translate(-50%, 0);
-  text-align: center;
-  padding: 40px;
-}
 </style>
