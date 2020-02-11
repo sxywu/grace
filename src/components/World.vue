@@ -12,6 +12,7 @@ import _ from 'lodash'
 import rafLoop from 'raf-loop'
 import * as d3 from 'd3'
 import * as THREE from 'three'
+const OrbitControls = require('three-orbit-controls')(THREE)
 
 export default {
   name: 'world',
@@ -29,6 +30,9 @@ export default {
     this.scene = new THREE.Scene()
     this.camera = new THREE.PerspectiveCamera(45, this.width / this.height, 1, 1000)
     this.renderer = new THREE.WebGLRenderer({antialias: true, alpha: true})
+
+    const controls = new OrbitControls(this.camera, this.renderer.domElement);
+    controls.addEventListener("change", () => this.renderer.render(this.scene, this.camera));
 
     // WebGL background color
     this.renderer.setClearColor(0xffffff, 0)
