@@ -23,7 +23,7 @@ export default {
       display: 'block',
       textWidth: 820,
       textHeight: 420,
-      decades: _.range(8)
+      decades: _.range(8),
     }
   },
   created() {
@@ -44,17 +44,18 @@ export default {
 
     // set camera position
     this.moveCameraVec = new THREE.Vector3(0, 0, 1)
+    this.camera.position.set( 0, 0, 10 )
     this.camera.lookAt( 0, 0, -2 * this.maxZPosition)
   },
   mounted() {
     this.$refs.container.appendChild(this.renderer.domElement)
 
-    // Setup our scene meshes
-    this.createOrbs()
-
     // Initiate the animation loop, call draw on every "tick"
     this.loop = rafLoop(this.draw)
     this.clock = new THREE.Clock()
+
+    this.createOrbs()
+    this.draw()
   },
   destroyed() {
     this.loop.stop().removeAllListeners()
@@ -67,6 +68,10 @@ export default {
     height() {
       this.handleWindowResize()
     },
+    orbs() {
+      this.createOrbs()
+      this.draw()
+    },
   },
   methods: {
     draw() {
@@ -74,6 +79,16 @@ export default {
       this.renderer.render(this.scene, this.camera)
     },
     createOrbs() {
+      const starGeometry = new THREE.SphereGeometry(0.1, 20, 20)
+      _.each(this.orbs, ({x, y, z}) => {
+        const starMaterial = new THREE.MeshBasicMaterial( {
+          color: 0xffffff,
+          side: THREE.DoubleSide,
+        })
+        const mesh = new THREE.Mesh(starGeometry, starMaterial)
+        mesh.position.set(x, y, z)
+        this.scene.add( mesh )
+      })
     },
     handleWindowResize() {
       this.renderer.setSize(this.width, this.height)

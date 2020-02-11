@@ -26,7 +26,7 @@ export default {
   },
   mounted() {
     const yScale = d3.scaleLinear()
-      .domain(d3.extent(filtered, d => d.backlinks)).range([0.25, 1.5])
+      .domain(d3.extent(filtered, d => d.backlinks)).range([-1, 1])
     const zScale = d3.scaleLinear()
       .domain(d3.extent(filtered, d => d.year)).range([0, -this.maxZPosition])
     this.orbs = _.map(filtered, (d, i) => Object.assign(d, {
