@@ -1,6 +1,12 @@
 <template>
   <div id="app">
-    <World v-bind='{width, height, maxZPosition, orbs}' />
+    <World v-bind='{
+      width, height, maxZPosition,
+      tl: timelines[1], orbs
+    }' /></World>
+    <Intro v-bind='{
+      tl: timelines[0],
+    }'></Intro>
   </div>
 </template>
 
@@ -13,14 +19,15 @@ import data from '../data/20names.json'
 const filtered = _.filter(data, d => d.year >= 1900)
 
 import World from './components/World.vue'
+import Intro from './components/Intro.vue'
 
 const docHeight = 30000
 
 export default {
   name: 'app',
-  components: {World},
+  components: {World, Intro},
   data() {
-    const sectionHeights = [docHeight * 0.15, docHeight * 0.55, docHeight * 0.3]
+    const sectionHeights = [docHeight * 0.15, docHeight * 0.7, docHeight * 0.15]
     return {
       width: window.innerWidth,
       height: window.innerHeight,
