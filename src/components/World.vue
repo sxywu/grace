@@ -48,11 +48,11 @@ export default {
     // lights
     // const hemisphere1 = new THREE.HemisphereLight( purple, blue, 1 )
     // this.scene.add(hemisphere1)
-    const hemisphere2 = new THREE.HemisphereLight( yellow, navy, 1.0 )
+    const hemisphere2 = new THREE.HemisphereLight( pink, navy, 1.5 )
     this.scene.add(hemisphere2)
-    const ambient = new THREE.AmbientLight(yellow , 1.0 )
+    const ambient = new THREE.AmbientLight(beige , 1.2 )
     this.scene.add(ambient)
-    this.light = new THREE.DirectionalLight( yellow, 1.0 )
+    this.light = new THREE.DirectionalLight( pink, 1.5 )
     this.light.position.set(0, 100, 100)
     this.scene.add( this.light )
 
@@ -102,7 +102,7 @@ export default {
       const starGeometry = new THREE.SphereGeometry(0.1, 20, 20)
       _.each(this.orbs, ({x, y, z}) => {
         const starMaterial = new THREE.MeshBasicMaterial( {
-          color: beige,
+          color: yellow,
           side: THREE.DoubleSide,
         })
         const mesh = new THREE.Mesh(starGeometry, starMaterial)
@@ -117,7 +117,7 @@ export default {
       const plane = new THREE.Mesh(
         new THREE.PlaneGeometry(planeSize, planeSize, planeSize, planeSize / 2),
         new THREE.MeshStandardMaterial( {
-          color: purple,
+          color: navy,
           side: THREE.DoubleSide,
       		flatShading: true,
           roughness: 1.0,
@@ -125,7 +125,7 @@ export default {
       )
       _.each(plane.geometry.vertices, v => {
         v.x += _.random(-0.25, 0.25)
-        v.y += _.random(-0.25, 0.25)
+        v.y += _.random(-0.1, 0.1)
         v.z += _.random(-0.25, 0.25)
       })
       plane.rotateX(-Math.PI / 2)
@@ -136,7 +136,7 @@ export default {
       const sky = new THREE.Mesh(
         new THREE.SphereGeometry(this.maxZPosition / 2 + 10, 20, 20),
         new THREE.MeshStandardMaterial( {
-          color: purple,
+          color: navy,
           side: THREE.BackSide,
         } )
       )
