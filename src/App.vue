@@ -7,21 +7,48 @@
 <script>
 import _ from 'lodash'
 import * as d3 from 'd3'
+import gsap from 'gsap'
+
 import data from '../data/20names.json'
 const filtered = _.filter(data, d => d.year >= 1900)
 
 import World from './components/World.vue'
 
+const docHeight = 30000
+
 export default {
   name: 'app',
   components: {World},
   data() {
+    const sectionHeights = [docHeight * 0.15, docHeight * 0.55, docHeight * 0.3]
     return {
       width: window.innerWidth,
       height: window.innerHeight,
       yellow: '#ffed4f', blue: '#0B1E38',
       maxZPosition: filtered.length,
       orbs: [],
+      // for scroll, section positions
+      sections: [
+        {index: 0, height: sectionHeights[0], top: 0, bottom: sectionHeights[0]},
+        {
+          index: 1,
+          height: sectionHeights[1],
+          top: sectionHeights[0],
+          bottom: sectionHeights[0] + sectionHeights[1],
+        },
+        {
+          index: 2,
+          height: sectionHeights[2],
+          top: sectionHeights[0] + sectionHeights[1],
+          bottom: sectionHeights[0] + sectionHeights[1] + sectionHeights[2],
+        },
+      ],
+      // timelines
+      timelines: [
+        new gsap.timeline({paused: true}),
+        new gsap.timeline({paused: true}),
+        new gsap.timeline({paused: true}),
+      ],
     }
   },
   mounted() {
@@ -50,8 +77,27 @@ export default {
     window.removeEventListener('resize', this.handleWindowResize)
   },
   methods: {
-    handleScroll() {
+    handleScroll: function() {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0
+      if (scrollTop > docHeight) return
 
+      const {index, top, height} = _.find(this.sections, ({bottom}) => scrollTop <= bottom)
+      const progress = (scrollTop - top) / height
+
+      if (index > 0) {
+        this.timelines[0].progress(1)
+      }
+      if (index > 1) {
+        this.timelines[1].progress(1)
+      }
+      if (index < 2) {
+        this.timelines[2].progress(0)
+      }
+      if (index < 1) {
+        this.timelines[1].progress(0)
+      }
+
+      const tl = this.timelines[index].progress(progress)
     },
     handleWindowResize: function() {
       this.width = window.innerWidth
