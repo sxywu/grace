@@ -42,14 +42,20 @@ export default {
 
     // scroll
     window.addEventListener('scroll', this.handleScroll)
+    window.addEventListener('resize', this.handleWindowResize)
     this.handleScroll()
   },
   destroyed() {
     window.removeEventListener('scroll', this.handleScroll)
+    window.removeEventListener('resize', this.handleWindowResize)
   },
   methods: {
     handleScroll() {
 
+    },
+    handleWindowResize: function() {
+      this.width = window.innerWidth
+      this.height = window.innerHeight
     },
   }
 }
