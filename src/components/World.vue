@@ -12,8 +12,6 @@ import _ from 'lodash'
 import rafLoop from 'raf-loop'
 import * as d3 from 'd3'
 import * as THREE from 'three'
-const OrbitControls = require('three-orbit-controls')(THREE)
-// import { BloomEffect, EffectComposer, EffectPass, RenderPass } from "postprocessing"
 
 const navy = 0x0B1E38
 const purple = 0x362C51
@@ -24,7 +22,7 @@ const beige = 0xEBBA8B
 
 export default {
   name: 'world',
-  props: ['width', 'height', 'maxZPosition', 'orbs'],
+  props: ['width', 'height', 'maxZPosition', 'orbs', 'tl'],
   data() {
     return {
       opacity: 1,
@@ -32,15 +30,15 @@ export default {
       textWidth: 820,
       textHeight: 420,
       decades: _.range(8),
+      cameraXPosition: 0,
+      cameraZPosition: 5,
+      // cameraPosition: {x: 0, y: 0, z: 5},
     }
   },
   created() {
     this.scene = new THREE.Scene()
     this.camera = new THREE.PerspectiveCamera(45, this.width / this.height, 1, 1000)
     this.renderer = new THREE.WebGLRenderer({antialias: true, alpha: true})
-
-    const controls = new OrbitControls(this.camera, this.renderer.domElement);
-    controls.addEventListener("change", () => this.renderer.render(this.scene, this.camera));
 
     // WebGL background color
     this.renderer.setClearColor(0xffffff, 0)
@@ -63,8 +61,8 @@ export default {
 
     // set camera position
     this.moveCameraVec = new THREE.Vector3(0, 0, 1)
-    this.camera.position.set( 0, 0, 10 )
     this.camera.lookAt( 0, 0, -2 * this.maxZPosition)
+    this.createTimeline()
   },
   mounted() {
     this.$refs.container.appendChild(this.renderer.domElement)
@@ -89,14 +87,37 @@ export default {
       this.handleWindowResize()
     },
     orbs() {
+      this.createTimeline()
       this.createOrbs()
       this.draw()
+    },
+    cameraZPosition() {
+
+      // update camera position
+      this.camera.position.set(
+        this.cameraXPosition,
+        0,
+        this.cameraZPosition,
+      )
+
+      // this.camera.position.addScaledVector(this.moveCameraVec, 1)
+      this.camera.updateMatrixWorld()
+      this.renderer.render(this.scene, this.camera)
     },
   },
   methods: {
     draw() {
       const time = this.clock.getElapsedTime()
       this.renderer.render(this.scene, this.camera)
+    },
+    createTimeline() {
+      // timeline
+      _.each(this.orbs, ({x, z}, i) => {
+        this.tl.to(this.$data, {
+          cameraXPosition: x,
+          cameraZPosition: z + 5,
+        }, i)
+      })
     },
     createOrbs() {
       const starGeometry = new THREE.SphereGeometry(0.1, 20, 20)

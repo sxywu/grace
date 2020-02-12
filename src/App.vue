@@ -16,7 +16,10 @@ import * as d3 from 'd3'
 import gsap from 'gsap'
 
 import data from '../data/20names.json'
-const filtered = _.filter(data, d => d.year >= 1900)
+const filtered = _.chain(data)
+  .filter(d => d.year >= 1900)
+  .sortBy(d => d.year)
+  .value()
 
 import World from './components/World.vue'
 import Intro from './components/Intro.vue'
