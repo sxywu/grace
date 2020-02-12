@@ -58,6 +58,7 @@ export default {
 
     // set camera position
     this.moveCameraVec = new THREE.Vector3(0, 0, 1)
+    this.camera.position.set( 0, 0, 5 )
     this.camera.lookAt( 0, 0, -2 * this.maxZPosition)
   },
   mounted() {
@@ -96,6 +97,8 @@ export default {
       this.renderer.render(this.scene, this.camera)
     },
     createTimeline() {
+      if (!this.orbs.length) return
+
       // timeline
       _.each(this.orbs, ({mesh, x, y, z}, i) => {
         this.tl.to(this.camera.position, {x: x + 0.25, y, z: z + 2, ease: 'none'}, i)
