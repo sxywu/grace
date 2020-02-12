@@ -30,9 +30,6 @@ export default {
       textWidth: 820,
       textHeight: 420,
       decades: _.range(8),
-      cameraXPosition: 0,
-      cameraZPosition: 5,
-      // cameraPosition: {x: 0, y: 0, z: 5},
     }
   },
   created() {
@@ -62,7 +59,6 @@ export default {
     // set camera position
     this.moveCameraVec = new THREE.Vector3(0, 0, 1)
     this.camera.lookAt( 0, 0, -2 * this.maxZPosition)
-    this.createTimeline()
   },
   mounted() {
     this.$refs.container.appendChild(this.renderer.domElement)
@@ -72,8 +68,10 @@ export default {
     this.clock = new THREE.Clock()
 
     this.createOrbs()
+    this.createTimeline()
     this.createBackground()
     this.draw()
+    this.loop.start()
   },
   destroyed() {
     this.loop.stop().removeAllListeners()
@@ -87,22 +85,9 @@ export default {
       this.handleWindowResize()
     },
     orbs() {
-      this.createTimeline()
       this.createOrbs()
+      this.createTimeline()
       this.draw()
-    },
-    cameraZPosition() {
-
-      // update camera position
-      this.camera.position.set(
-        this.cameraXPosition,
-        0,
-        this.cameraZPosition,
-      )
-
-      // this.camera.position.addScaledVector(this.moveCameraVec, 1)
-      this.camera.updateMatrixWorld()
-      this.renderer.render(this.scene, this.camera)
     },
   },
   methods: {
@@ -112,11 +97,8 @@ export default {
     },
     createTimeline() {
       // timeline
-      _.each(this.orbs, ({x, z}, i) => {
-        this.tl.to(this.$data, {
-          cameraXPosition: x,
-          cameraZPosition: z + 5,
-        }, i)
+      _.each(this.orbs, ({mesh, x, y, z}, i) => {
+        this.tl.to(this.camera.position, {x: x + 0.25, y, z: z + 2, ease: 'none'}, i)
       })
     },
     createOrbs() {
@@ -134,7 +116,7 @@ export default {
     createBackground() {
       // textured floor inspiration from
       // https://tympanus.net/codrops/2016/04/26/the-aviator-animating-basic-3d-scene-threejs/
-      const planeSize = 2 * this.maxZPosition
+      const planeSize = this.maxZPosition + 20
       const plane = new THREE.Mesh(
         new THREE.PlaneGeometry(planeSize, planeSize, planeSize, planeSize / 2),
         new THREE.MeshStandardMaterial( {
@@ -155,12 +137,13 @@ export default {
 
       // and add "sky"
       const sky = new THREE.Mesh(
-        new THREE.SphereGeometry(this.maxZPosition / 2 + 10, 20, 20),
+        new THREE.SphereGeometry(planeSize, 20, 20),
         new THREE.MeshStandardMaterial( {
           color: navy,
           side: THREE.BackSide,
         } )
       )
+      sky.translateZ(-3)
       this.scene.add( sky )
     },
     handleWindowResize() {

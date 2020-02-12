@@ -30,7 +30,7 @@ export default {
   name: 'app',
   components: {World, Intro},
   data() {
-    const sectionHeights = [docHeight * 0.15, docHeight * 0.7, docHeight * 0.15]
+    const sectionHeights = [docHeight * 0.15, docHeight * 0.84, docHeight * 0.01]
     return {
       width: window.innerWidth,
       height: window.innerHeight,
@@ -66,16 +66,23 @@ export default {
       .domain(d3.extent(filtered, d => d.backlinks)).range([-1, 1])
     const zScale = d3.scaleLinear()
       .domain(d3.extent(filtered, d => d.year)).range([0, -this.maxZPosition])
-    this.orbs = _.map(filtered, (d, i) => Object.assign(d, {
-      x: 0,
-      fy: zScale(d.year), // y & z are backwards bc force simulation
-      height: yScale(d.backlinks),
-    }))
-    const simulation = d3.forceSimulation(this.orbs)
-      .force('collide', d3.forceCollide(1))
+    const positions = _.map(filtered, (d, i) => {
+      return {
+        x: 0,
+        fy: zScale(d.year), // y & z are backwards bc force simulation
+        height: yScale(d.backlinks),
+      }
+    })
+    const simulation = d3.forceSimulation(positions)
+      .force('collide', d3.forceCollide(1.5))
       .force('x', d3.forceX(0))
     _.times(1000, i => simulation.tick())
-    _.each(this.orbs, d => Object.assign(d, {y: d.height, z: d.y})) // switch y & z back
+    this.orbs = _.map(filtered, (d, i) => {
+      const {x, y, height} = positions[i]
+      return Object.assign({}, d, {
+        x, y: height, z: y
+      })
+    })
 
     // scroll
     window.addEventListener('scroll', this.handleScroll)
