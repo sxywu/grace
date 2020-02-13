@@ -22,9 +22,9 @@ const pink = 0xDD867E
 const beige = 0xEBBA8B
 
 const colorInterpolate = d3.interpolateCubehelix('#FFE78B', '#DD867E') // yellow, pink
-const canvasWidth = 600
-const canvasHeight = 600
-const numCircles = 8
+const canvasWidth = 512
+const canvasHeight = 512
+const numCircles = 5
 const circleRadius = 100
 const circleOpacities = [0.05, 0.1, 1]
 const circleRadii = [1, 0.75, 0.5]
@@ -108,6 +108,11 @@ export default {
     draw() {
       const elapsed = this.clock.getElapsedTime()
       this.drawCircles(elapsed)
+      _.each(this.orbs, ({mesh}) => {
+        // update texture so that orbs will animate!
+        mesh.material.needsUpdate = true
+        mesh.material.map.needsUpdate = true
+      })
 
       this.renderer.render(this.scene, this.camera)
     },
@@ -166,15 +171,23 @@ export default {
       })
     },
     createOrbs() {
-      const starGeometry = new THREE.SphereGeometry(0.1, 20, 20)
-      _.each(this.orbs, ({x, y, z}) => {
-        const starMaterial = new THREE.MeshBasicMaterial( {
-          color: yellow,
-          side: THREE.DoubleSide,
+      const geometry = new THREE.PlaneGeometry(1.25, 1.25, 1, 1)
+      _.each(this.orbs, (d) => {
+        const {x, y, z, canvas} = d
+        const texture = new THREE.Texture(canvas)
+
+        const material = new THREE.MeshBasicMaterial({
+          map: texture,
+          transparent: true,
+          opacity: 1.0,
         })
-        const mesh = new THREE.Mesh(starGeometry, starMaterial)
+        material.map.needsUpdate = true
+
+        const mesh = new THREE.Mesh(geometry, material)
         mesh.position.set(x, y, z)
         this.scene.add( mesh )
+
+        d.mesh = mesh
       })
     },
     createTimeline() {
