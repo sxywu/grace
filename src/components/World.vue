@@ -82,6 +82,7 @@ export default {
     this.createOrbs()
     this.createTimeline()
     this.createBackground()
+    this.createStars()
     this.draw()
     this.loop.start()
   },
@@ -233,6 +234,26 @@ export default {
       )
       sky.translateZ(-3)
       this.scene.add( sky )
+    },
+    createStars() {
+      const starGeometry = new THREE.CircleGeometry(0.075, 20, 20)
+      const starMaterial = new THREE.MeshBasicMaterial( {
+        color: 0xfffef5,
+      })
+      _.times(480, i => {
+        // small white dot
+        const star = new THREE.Mesh(starGeometry, starMaterial)
+        const angle = p5.prototype.randomGaussian(-Math.PI / 2, Math.PI / 2)
+        const radius = this.maxZPosition + _.random(20)
+        const scale = Math.random()
+        star.position.set(
+          radius * Math.cos(angle), // x
+          _.random(-3, this.maxZPosition / 2), // y
+          radius * Math.sin(angle), // z
+        )
+        star.scale.set(scale, scale, scale)
+        this.scene.add( star )
+      })
     },
     handleWindowResize() {
       this.renderer.setSize(this.width, this.height)
