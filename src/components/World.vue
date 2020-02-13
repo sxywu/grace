@@ -120,9 +120,9 @@ export default {
       _.each(this.orbs, (d, i) => {
         d.circles = _.times(numCircles, j => {
           return {
-            cx: p5.prototype.randomGaussian(canvasWidth / 2, 0.1),
-            cy: p5.prototype.randomGaussian(canvasHeight / 2, 0.1),
-            radius: p5.prototype.randomGaussian(circleRadius, circleRadius / 10),
+            cx: canvasWidth / 2,
+            cy: canvasHeight / 2,
+            radius: p5.prototype.randomGaussian(circleRadius, circleRadius / 20),
             color: colorInterpolate(p5.prototype.randomGaussian(0.25, 0.15)),
             offset: i * 1000 + j * 10,
           }
@@ -151,8 +151,8 @@ export default {
         _.each(circles, ({cx, cy, radius, color, offset}, i) => {
           // first, calculate x and y positions
           const noise = p5.prototype.noise(offset + xoff)
-          const t = i * elapsed / (numCircles * 100) + offset
-          let x = 1.25 * noise * radius * Math.cos(t) * Math.sin(t)
+          const t = i * elapsed / (numCircles * 200) + offset
+          let x = noise * radius * Math.cos(t) * Math.sin(t)
           let y = noise * radius * Math.sin(t)
           x *= (i % 2) ? Math.cos(t) : Math.sin(t)
 
