@@ -7,6 +7,9 @@
     <Intro v-bind='{
       tl: timelines[0],
     }'></Intro>
+    <Infobox v-bind='{
+      tl: timelines[1], orbs,
+    }'></Infobox>
   </div>
 </template>
 
@@ -23,12 +26,13 @@ const filtered = _.chain(data)
 
 import World from './components/World.vue'
 import Intro from './components/Intro.vue'
+import Infobox from './components/Infobox.vue'
 
 const docHeight = 30000
 
 export default {
   name: 'app',
-  components: {World, Intro},
+  components: {World, Intro, Infobox},
   data() {
     const sectionHeights = [docHeight * 0.15, docHeight * 0.84, docHeight * 0.01]
     return {
@@ -74,7 +78,7 @@ export default {
       }
     })
     const simulation = d3.forceSimulation(positions)
-      .force('collide', d3.forceCollide(1.5))
+      .force('collide', d3.forceCollide(1))
       .force('x', d3.forceX(0))
     _.times(1000, i => simulation.tick())
     this.orbs = _.map(filtered, (d, i) => {

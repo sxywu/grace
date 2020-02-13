@@ -101,8 +101,11 @@ export default {
 
       // timeline
       _.each(this.orbs, ({mesh, x, y, z}, i) => {
-        this.tl.to(this.camera.position, {x: x + 0.25, y, z: z + 2, ease: 'none'}, i)
+        this.tl.to(this.camera.position, {x, y, z: z + 2, ease: 'none'}, i)
       })
+      this.tl.to(this.camera.position, {
+        x: 0, y: 0, z: -this.maxZPosition - 5, ease: 'none', duration: 2,
+      }, this.orbs.length)
     },
     createOrbs() {
       const starGeometry = new THREE.SphereGeometry(0.1, 20, 20)
