@@ -1,9 +1,9 @@
 <template>
   <div id='world' :style='{opacity, display}'>
+    <canvas class='hidden' v-for='i in 18' :ref='`orb${i - 1}`'
+      :width='2 * canvasWidth' :height='2 * canvasHeight'
+      :style='{width: `${canvasWidth}px`, height: `${canvasHeight}px`}'></canvas>
     <div ref='container' :width='width' :height='height'></div>
-    <canvas class='hidden' v-for='(d, i) in decades' :ref='`decade${i}`'
-      :width='2 * textWidth' :height='2 * textHeight'
-      :style='{width: `${textWidth}px`, height: `${textHeight}px`}'></canvas>
   </div>
 </template>
 
@@ -34,9 +34,8 @@ export default {
     return {
       opacity: 1,
       display: 'block',
-      textWidth: 820,
-      textHeight: 420,
-      decades: _.range(8),
+      canvasWidth,
+      canvasHeight,
     }
   },
   created() {
@@ -75,6 +74,7 @@ export default {
     this.loop = rafLoop(this.draw)
     this.clock = new THREE.Clock()
 
+    this.storeOrbCanvases()
     this.calculateCircles()
     this.createOrbs()
     this.createTimeline()
@@ -94,6 +94,7 @@ export default {
       this.handleWindowResize()
     },
     orbs() {
+      this.storeOrbCanvases()
       this.calculateCircles()
       this.createOrbs()
       this.createTimeline()
@@ -116,6 +117,18 @@ export default {
             offset: (i * 100 + j) * 1000,
           }
         })
+      })
+    },
+    storeOrbCanvases() {
+      if (!this.orbs.length) return
+
+      _.each(this.orbs, (d, i) => {
+        const canvas = this.$refs[`orb${i}`][0]
+        const ctx = canvas.getContext('2d')
+        ctx.scale(2, 2)
+        ctx.globalCompositeOperation = 'screen'
+
+        Object.assign(d, {canvas, ctx})
       })
     },
     createOrbs() {
