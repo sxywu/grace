@@ -24,8 +24,11 @@ const beige = 0xEBBA8B
 const colorInterpolate = d3.interpolateCubehelix('#FFE78B', '#DD867E') // yellow, pink
 const canvasWidth = 600
 const canvasHeight = 600
-const numCircles = 9
+const numCircles = 8
 const circleRadius = 100
+const circleOpacities = [0.05, 0.1, 1]
+const circleRadii = [1, 0.75, 0.5]
+let xoff = 0
 
 export default {
   name: 'world',
@@ -103,18 +106,20 @@ export default {
   },
   methods: {
     draw() {
-      const time = this.clock.getElapsedTime()
+      const elapsed = this.clock.getElapsedTime()
+      this.drawCircles(elapsed)
+
       this.renderer.render(this.scene, this.camera)
     },
     calculateCircles() {
       _.each(this.orbs, (d, i) => {
         d.circles = _.times(numCircles, j => {
           return {
-            cx: p5.prototype.randomGaussian(canvasWidth / 2, 5),
-            cy: p5.prototype.randomGaussian(canvasHeight / 2, 5),
-            radius: p5.prototype.randomGaussian(circleRadius, circleRadius / 4),
+            cx: p5.prototype.randomGaussian(canvasWidth / 2, 0.1),
+            cy: p5.prototype.randomGaussian(canvasHeight / 2, 0.1),
+            radius: p5.prototype.randomGaussian(circleRadius, circleRadius / 10),
             color: colorInterpolate(p5.prototype.randomGaussian(0.25, 0.15)),
-            offset: (i * 100 + j) * 1000,
+            offset: i * 1000 + j * 10,
           }
         })
       })
@@ -129,6 +134,35 @@ export default {
         ctx.globalCompositeOperation = 'screen'
 
         Object.assign(d, {canvas, ctx})
+      })
+    },
+    drawCircles(elapsed) {
+      xoff += 0.02
+
+      _.each(this.orbs, ({circles, ctx}) => {
+        // first clear canvas
+        ctx.clearRect(0, 0, canvasWidth, canvasHeight)
+
+        _.each(circles, ({cx, cy, radius, color, offset}, i) => {
+          // first, calculate x and y positions
+          const noise = p5.prototype.noise(offset + xoff)
+          const t = i * elapsed / (numCircles * 100) + offset
+          let x = 1.25 * noise * radius * Math.cos(t) * Math.sin(t)
+          let y = noise * radius * Math.sin(t)
+          x *= (i % 2) ? Math.cos(t) : Math.sin(t)
+
+          // add to central x/y
+          x += cx + 5 * noise
+          y += cy + 5 * noise
+
+          _.times(3, i => {
+            ctx.globalAlpha = circleOpacities[i]
+            ctx.fillStyle = color
+            ctx.beginPath()
+            ctx.arc(x, y, circleRadii[i] * radius, 0, 2 * Math.PI, 0)
+            ctx.fill()
+          })
+        })
       })
     },
     createOrbs() {
