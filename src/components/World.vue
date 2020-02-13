@@ -151,9 +151,9 @@ export default {
         _.each(circles, ({cx, cy, radius, color, offset}, i) => {
           // first, calculate x and y positions
           const noise = p5.prototype.noise(offset + xoff)
-          const t = i * elapsed / (numCircles * 200) + offset
-          let x = noise * radius * Math.cos(t) * Math.sin(t)
-          let y = noise * radius * Math.sin(t)
+          const t = i * elapsed / (numCircles * 300) + offset
+          let x = 0.65 * noise * radius * Math.cos(t) * Math.sin(t)
+          let y = 0.45 * noise * radius * Math.sin(t)
           x *= (i % 2) ? Math.cos(t) : Math.sin(t)
 
           // add to central x/y

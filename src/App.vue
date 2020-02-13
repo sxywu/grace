@@ -39,7 +39,7 @@ export default {
       width: window.innerWidth,
       height: window.innerHeight,
       yellow: '#ffed4f', blue: '#0B1E38',
-      maxZPosition: filtered.length,
+      maxZPosition: 1.5 * filtered.length,
       orbs: [],
       // for scroll, section positions
       sections: [
@@ -78,7 +78,7 @@ export default {
       }
     })
     const simulation = d3.forceSimulation(positions)
-      .force('collide', d3.forceCollide(1))
+      .force('collide', d3.forceCollide(1.1))
       .force('x', d3.forceX(0))
     _.times(1000, i => simulation.tick())
     this.orbs = _.map(filtered, (d, i) => {
