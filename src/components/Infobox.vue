@@ -67,6 +67,7 @@ export default {
   width: 360px;
   transform: translate(-50%, -50%);
   text-align: center;
+  color: #0B1E38;
 }
 
 .title {

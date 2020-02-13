@@ -67,7 +67,7 @@ export default {
   },
   mounted() {
     const yScale = d3.scaleLinear()
-      .domain(d3.extent(filtered, d => d.backlinks)).range([-1, 1])
+      .domain(d3.extent(filtered, d => d.backlinks)).range([-1, 2])
     const zScale = d3.scaleLinear()
       .domain(d3.extent(filtered, d => d.year)).range([0, -this.maxZPosition])
     const positions = _.map(filtered, (d, i) => {
@@ -78,7 +78,7 @@ export default {
       }
     })
     const simulation = d3.forceSimulation(positions)
-      .force('collide', d3.forceCollide(1.1))
+      .force('collide', d3.forceCollide(1.25))
       .force('x', d3.forceX(0))
     _.times(1000, i => simulation.tick())
     this.orbs = _.map(filtered, (d, i) => {

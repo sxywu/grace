@@ -22,10 +22,10 @@ const pink = 0xDD867E
 const beige = 0xEBBA8B
 
 const colorInterpolate = d3.interpolateCubehelix('#FFE78B', '#DD867E') // yellow, pink
-const canvasWidth = 512
-const canvasHeight = 512
+const canvasWidth = 256
+const canvasHeight = 256
 const numCircles = 5
-const circleRadius = 100
+const circleRadius = 75
 const circleOpacities = [0.05, 0.1, 1]
 const circleRadii = [1, 0.75, 0.5]
 let xoff = 0
