@@ -12,6 +12,7 @@ import _ from 'lodash'
 import rafLoop from 'raf-loop'
 import * as d3 from 'd3'
 import * as THREE from 'three'
+import p5 from 'p5'
 
 const navy = 0x0B1E38
 const purple = 0x362C51
@@ -19,6 +20,12 @@ const blue = 0x51629E
 const yellow = 0xFFE78B
 const pink = 0xDD867E
 const beige = 0xEBBA8B
+
+const colorInterpolate = d3.interpolateCubehelix('#FFE78B', '#DD867E') // yellow, pink
+const canvasWidth = 600
+const canvasHeight = 600
+const numCircles = 9
+const circleRadius = 100
 
 export default {
   name: 'world',
@@ -68,6 +75,7 @@ export default {
     this.loop = rafLoop(this.draw)
     this.clock = new THREE.Clock()
 
+    this.calculateCircles()
     this.createOrbs()
     this.createTimeline()
     this.createBackground()
@@ -86,6 +94,7 @@ export default {
       this.handleWindowResize()
     },
     orbs() {
+      this.calculateCircles()
       this.createOrbs()
       this.createTimeline()
       this.draw()
@@ -96,16 +105,18 @@ export default {
       const time = this.clock.getElapsedTime()
       this.renderer.render(this.scene, this.camera)
     },
-    createTimeline() {
-      if (!this.orbs.length) return
-
-      // timeline
-      _.each(this.orbs, ({mesh, x, y, z}, i) => {
-        this.tl.to(this.camera.position, {x, y, z: z + 2, ease: 'none'}, i)
+    calculateCircles() {
+      _.each(this.orbs, (d, i) => {
+        d.circles = _.times(numCircles, j => {
+          return {
+            cx: p5.prototype.randomGaussian(canvasWidth / 2, 5),
+            cy: p5.prototype.randomGaussian(canvasHeight / 2, 5),
+            radius: p5.prototype.randomGaussian(circleRadius, circleRadius / 4),
+            color: colorInterpolate(p5.prototype.randomGaussian(0.25, 0.15)),
+            offset: (i * 100 + j) * 1000,
+          }
+        })
       })
-      this.tl.to(this.camera.position, {
-        x: 0, y: 0, z: -this.maxZPosition - 5, ease: 'none', duration: 2,
-      }, this.orbs.length)
     },
     createOrbs() {
       const starGeometry = new THREE.SphereGeometry(0.1, 20, 20)
@@ -118,6 +129,17 @@ export default {
         mesh.position.set(x, y, z)
         this.scene.add( mesh )
       })
+    },
+    createTimeline() {
+      if (!this.orbs.length) return
+
+      // timeline
+      _.each(this.orbs, ({mesh, x, y, z}, i) => {
+        this.tl.to(this.camera.position, {x, y, z: z + 2, ease: 'none'}, i)
+      })
+      this.tl.to(this.camera.position, {
+        x: 0, y: 0, z: -this.maxZPosition - 5, ease: 'none', duration: 2,
+      }, this.orbs.length)
     },
     createBackground() {
       // textured floor inspiration from

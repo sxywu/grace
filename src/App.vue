@@ -84,7 +84,7 @@ export default {
     this.orbs = _.map(filtered, (d, i) => {
       const {x, y, height} = positions[i]
       return Object.assign({}, d, {
-        x, y: height, z: y
+        x, y: height, z: y,
       })
     })
 
