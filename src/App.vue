@@ -34,7 +34,7 @@ export default {
   name: 'app',
   components: {World, Intro, Infobox},
   data() {
-    const sectionHeights = [docHeight * 0.15, docHeight * 0.84, docHeight * 0.01]
+    const sectionHeights = [docHeight * 0.2, docHeight * 0.79, docHeight * 0.01]
     return {
       width: window.innerWidth,
       height: window.innerHeight,

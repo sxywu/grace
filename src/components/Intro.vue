@@ -1,10 +1,10 @@
 <template>
-  <div id="intro" :style='{display}'>
+  <div id="intro" :style='{display, opacity}'>
     <div class='videos'>
       <video src='https://storage.googleapis.com/one-amongst-many-v2/fancy_reduced.mp4'
-        preload autoplay loop muted playsinline></video>
+        :style='{opacity: fancyOpacity}' preload autoplay loop muted playsinline></video>
       <video src='https://storage.googleapis.com/one-amongst-many-v2/timelapse_reduced.mp4'
-        preload autoplay loop muted playsinline></video>
+         :style='{opacity: timelapseOpacity}' preload autoplay loop muted playsinline></video>
       <div class='overlayImage'></div>
     </div>
     <div class='subsection' :style='{opacity: scrollOpacity}'>
@@ -35,18 +35,21 @@ export default {
   data() {
     return {
       display: 'block',
+      opacity: 1,
       scrollOpacity: 1,
       legendOpacity: 0,
+      fancyOpacity: 1,
+      timelapseOpacity: 0,
     }
   },
   mounted() {
     // register to timeline
     // 1. fade out scroll
-    this.tl.to(this.$data, {scrollOpacity: 0})
+    this.tl.to(this.$data, {scrollOpacity: 0}, 1)
     // 2. fade in legend
-    this.tl.to(this.$data, {legendOpacity: 1})
+    this.tl.to(this.$data, {fancyOpacity: 0, legendOpacity: 1, timelapseOpacity: 1}, 1.5)
     // 3. fade out legend
-    this.tl.to(this.$data, {legendOpacity: 0})
+    this.tl.to(this.$data, {legendOpacity: 0, timelapseOpacity: 0, opacity: 0, duration: 1.5}, 2.5)
   },
   watch: {
   },
