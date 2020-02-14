@@ -1,5 +1,12 @@
 <template>
   <div id="intro" :style='{display}'>
+    <div class='videos'>
+      <video src='https://storage.googleapis.com/one-amongst-many-v2/fancy_reduced.mp4'
+        preload autoplay loop muted playsinline></video>
+      <video src='https://storage.googleapis.com/one-amongst-many-v2/timelapse_reduced.mp4'
+        preload autoplay loop muted playsinline></video>
+      <div class='overlayImage'></div>
+    </div>
     <div class='subsection' :style='{opacity: scrollOpacity}'>
       <h1>One Amongst Many</h1>
       <p>
@@ -24,7 +31,7 @@ import * as d3 from 'd3'
 
 export default {
   name: 'intro',
-  props: ['tl'],
+  props: ['tl', 'width', 'height'],
   data() {
     return {
       display: 'block',
@@ -40,6 +47,8 @@ export default {
     this.tl.to(this.$data, {legendOpacity: 1})
     // 3. fade out legend
     this.tl.to(this.$data, {legendOpacity: 0})
+  },
+  watch: {
   },
   methods: {
   }
@@ -61,5 +70,36 @@ export default {
   left: 50vw;
   width: 600px;
   transform: translate(-50%, -50%);
+}
+
+.videos {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.videos video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: auto;
+  min-width: 100vw;
+  height: auto;
+  min-height: 100vh;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.overlayImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(https://storage.googleapis.com/one-amongst-many-v2/bg-pattern.png);
+  opacity: .3;
+  pointer-events: none;
 }
 </style>
