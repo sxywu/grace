@@ -24,8 +24,7 @@ const beige = 0xEBBA8B
 const colorInterpolate = d3.interpolateCubehelix('#FFE78B', '#DD867E') // yellow, pink
 const canvasWidth = 256
 const canvasHeight = 256
-const numCircles = 5
-const circleRadius = 75
+const circleRadius = 80
 const circleOpacities = [0.05, 0.1, 1]
 const circleRadii = [1, 0.75, 0.5]
 let xoff = 0
@@ -118,14 +117,26 @@ export default {
       this.renderer.render(this.scene, this.camera)
     },
     calculateCircles() {
+      if (!this.orbs.length) return
+
+      const numScale = d3.scaleQuantize()
+        .domain(d3.extent(this.orbs, d => d.references))
+        .range(_.range(4, 8))
+      const speedScale = d3.scaleLog()
+        .domain(d3.extent(this.orbs, d => d.birthYear ? d.year - d.birthYear : 36))
+        .range([0.5, 1])
+
       _.each(this.orbs, (d, i) => {
+        const numCircles = numScale(d.references)
+        const speed = speedScale(d.birthYear ? d.year - d.birthYear : 36)
         d.circles = _.times(numCircles, j => {
           return {
             cx: canvasWidth / 2,
             cy: canvasHeight / 2,
-            radius: p5.prototype.randomGaussian(circleRadius, circleRadius / 20),
+            radius: p5.prototype.randomGaussian(circleRadius, 10),
             color: colorInterpolate(p5.prototype.randomGaussian(0.25, 0.15)),
             offset: i * 1000 + j * 10,
+            numCircles, speed,
           }
         })
       })
@@ -143,23 +154,23 @@ export default {
       })
     },
     drawCircles(elapsed) {
-      xoff += 0.02
+      xoff += 0.01
 
       _.each(this.orbs, ({circles, ctx}) => {
         // first clear canvas
         ctx.clearRect(0, 0, canvasWidth, canvasHeight)
 
-        _.each(circles, ({cx, cy, radius, color, offset}, i) => {
+        _.each(circles, ({cx, cy, radius, color, offset, numCircles, speed}, i) => {
           // first, calculate x and y positions
           const noise = p5.prototype.noise(offset + xoff)
-          const t = i * elapsed / (numCircles * 300) + offset
+          const t = i * elapsed / (numCircles * speed) + offset
           let x = 0.65 * noise * radius * Math.cos(t) * Math.sin(t)
-          let y = 0.45 * noise * radius * Math.sin(t)
+          let y = 0.5 * noise * radius * Math.sin(t)
           x *= (i % 2) ? Math.cos(t) : Math.sin(t)
 
           // add to central x/y
-          x += cx + 5 * noise
-          y += cy + 5 * noise
+          x += cx + 10 * noise
+          y += cy + 10 * noise
 
           _.times(3, i => {
             ctx.globalAlpha = circleOpacities[i]
@@ -172,6 +183,8 @@ export default {
       })
     },
     createOrbs() {
+      if (!this.orbs.length) return
+
       const geometry = new THREE.PlaneGeometry(1.25, 1.25, 1, 1)
       _.each(this.orbs, (d) => {
         const {x, y, z, canvas} = d
