@@ -48,7 +48,11 @@ export default {
         // fade out prev
         this.tl.to(this.$data, {bioOpacity: 0, duration: bioDuration / 2}, i)
         // update info
-        this.tl.set(this.$data, {name, fields, shortSummary}, i + 0.5)
+        this.tl.add(() => {
+          this.name = name
+          this.fields = fields
+          this.shortSummary = shortSummary
+        }, i + 0.5)
         // fade it back in
         this.tl.to(this.$data, {bioOpacity: 1, duration: bioDuration}, i + 0.5)
       })
@@ -64,7 +68,7 @@ export default {
   position: absolute;
   top: 50vh;
   left: 50vw;
-  width: 360px;
+  width: 300px;
   transform: translate(-50%, -50%);
   text-align: center;
   color: #0B1E38;
