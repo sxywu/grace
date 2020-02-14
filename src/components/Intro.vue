@@ -1,10 +1,10 @@
 <template>
   <div id="intro" :style='{display, opacity}'>
     <div class='videos'>
-      <video src='https://storage.googleapis.com/one-amongst-many-v2/fancy_reduced.mp4'
-        :style='{opacity: fancyOpacity}' preload autoplay loop muted playsinline></video>
       <video src='https://storage.googleapis.com/one-amongst-many-v2/timelapse_reduced.mp4'
          :style='{opacity: timelapseOpacity}' preload autoplay loop muted playsinline></video>
+      <video src='https://storage.googleapis.com/one-amongst-many-v2/fancy_reduced.mp4'
+        :style='{opacity: fancyOpacity}' preload autoplay loop muted playsinline></video>
       <div class='overlayImage'></div>
     </div>
     <div class='subsection' :style='{opacity: scrollOpacity}'>
@@ -50,6 +50,7 @@ export default {
     this.tl.to(this.$data, {fancyOpacity: 0, legendOpacity: 1, timelapseOpacity: 1}, 1.5)
     // 3. fade out legend
     this.tl.to(this.$data, {legendOpacity: 0, timelapseOpacity: 0, opacity: 0, duration: 1.5}, 2.5)
+    this.tl.set(this.$data, {display: 'none'}, 4)
   },
   watch: {
   },

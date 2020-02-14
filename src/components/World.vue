@@ -1,5 +1,5 @@
 <template>
-  <div id='world' :style='{opacity, display}'>
+  <div id='world' :style='{display, opacity}'>
     <canvas class='hidden' v-for='i in 18' :ref='`orb${i - 1}`'
       :width='2 * canvasWidth' :height='2 * canvasHeight'
       :style='{width: `${canvasWidth}px`, height: `${canvasHeight}px`}'></canvas>
@@ -32,11 +32,11 @@ let xoff = 0
 
 export default {
   name: 'world',
-  props: ['width', 'height', 'maxZPosition', 'orbs', 'tl'],
+  props: ['width', 'height', 'maxZPosition', 'orbs', 'tl', 'tl0'],
   data() {
     return {
-      opacity: 1,
-      display: 'block',
+      display: 'none',
+      opacity: 0,
       canvasWidth,
       canvasHeight,
     }
@@ -67,7 +67,7 @@ export default {
 
     // set camera position
     this.moveCameraVec = new THREE.Vector3(0, 0, 1)
-    this.camera.position.set( 0, 0, 5 )
+    this.camera.position.set( 0, 0, 10 )
     this.camera.lookAt( 0, 0, -2 * this.maxZPosition)
   },
   mounted() {
@@ -214,12 +214,16 @@ export default {
     createTimeline() {
       if (!this.orbs.length) return
 
+      // fade the world in
+      this.tl0.set(this.$data, {display: 'block'}, 2.5)
+      this.tl0.to(this.$data, {opacity: 1, duration: 1.5}, 2.5)
+
       // timeline
       _.each(this.orbs, ({mesh, x, y, z}, i) => {
-        this.tl.to(this.camera.position, {x, y, z: z + 2, ease: 'none'}, i)
+        this.tl.to(this.camera.position, {x, y, z: z + 2}, i)
       })
       this.tl.to(this.camera.position, {
-        x: 0, y: 0, z: -this.maxZPosition - 5, ease: 'none', duration: 2,
+        x: 0, y: 0, z: -this.maxZPosition - 5, duration: 2,
       }, this.orbs.length)
     },
     createBackground() {

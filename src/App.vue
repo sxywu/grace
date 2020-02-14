@@ -2,7 +2,7 @@
   <div id="app">
     <World v-bind='{
       width, height, maxZPosition,
-      tl: timelines[1], orbs
+      tl0: timelines[0], tl: timelines[1], orbs
     }' /></World>
     <Intro v-bind='{
       tl: timelines[0],
