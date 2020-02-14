@@ -27,6 +27,7 @@ const canvasHeight = 256
 const circleRadius = 80
 const circleOpacities = [0.05, 0.1, 1]
 const circleRadii = [1, 0.75, 0.5]
+const fadeThreshold = 15
 let xoff = 0
 
 export default {
@@ -108,10 +109,16 @@ export default {
     draw() {
       const elapsed = this.clock.getElapsedTime()
       this.drawCircles(elapsed)
-      _.each(this.orbs, ({mesh}) => {
+
+      const cameraZPosition = this.camera.position.z
+      _.each(this.orbs, ({mesh, z}) => {
         // update texture so that orbs will animate!
-        mesh.material.needsUpdate = true
         mesh.material.map.needsUpdate = true
+
+        const dist = Math.abs(z - cameraZPosition)
+        const scale = 1 - (dist > fadeThreshold ? (dist - fadeThreshold) / (1.5 * fadeThreshold) : 0)
+        // mesh.material.opacity = scale
+        mesh.scale.set(scale, scale, scale)
       })
 
       this.renderer.render(this.scene, this.camera)
