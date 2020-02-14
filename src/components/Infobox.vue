@@ -1,10 +1,13 @@
 <template>
   <div id="infobox" :style='{opacity}'>
-    <div class='year'><strong>{{ parseInt(year) }}</strong></div>
     <div :style='{opacity: bioOpacity}'>
+      <div class='year'><strong>{{ parseInt(year) }}</strong></div>
       <div class='title'>{{ name }}</div>
-      <div><em>{{ fields }}</em></div>
+      <div class='fields'><em>{{ fields }}</em></div>
       <div>{{ shortSummary }}</div>
+      <p>
+        <a :src='url' target='_new'>read more</a> →
+      </p>
     </div>
   </div>
 </template>
@@ -24,6 +27,7 @@ export default {
       shortSummary: '',
       opacity: 0,
       bioOpacity: 0,
+      url: '',
     }
   },
   mounted() {
@@ -41,7 +45,7 @@ export default {
       const bioDuration = 0.2
 
       this.tl.to(this.$data, {opacity: 1}, 0)
-      _.each(this.orbs, ({name, fields, year, shortSummary}, i) => {
+      _.each(this.orbs, ({name, url, fields, year, shortSummary}, i) => {
         // year
         this.tl.to(this.$data, {year}, i)
 
@@ -52,6 +56,7 @@ export default {
           this.name = name
           this.fields = fields
           this.shortSummary = shortSummary
+          this.url = url
         }, i + 0.5)
         // fade it back in
         this.tl.to(this.$data, {bioOpacity: 1, duration: bioDuration}, i + 0.5)
@@ -77,6 +82,11 @@ export default {
 .title {
   font-size: 1.5em;
   font-weight: bold;
+}
+
+.fields {
+  font-size: 0.85em;
+  white-space: nowrap;
 }
 
 .year {
