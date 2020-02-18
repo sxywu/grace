@@ -8,20 +8,23 @@
       <div class='overlayImage'></div>
     </div>
     <div class='subsection' :style='{opacity: scrollOpacity}'>
-      <h1>One Amongst Many</h1>
+      <div class='title'>One Amongst Many</div>
+      <div class='byline'>
+        by <a href='http://cdacanay.com/' target='_new'>Christina Dacanay</a>, <a href='https://tina.pizza/' target='_new'>Tina Rungsawang</a>, and <a href='http://sxywu.com/' target='_new'>Shirley Wu</a>
+      </div>
       <p>
-        is intended to be a physical data installation, but it is important to us to be able to share these amazing women's contributions with the world.
+        Young women entering fields dominated by men often feel like there is no history of people like them in their field. We know now that this is an issue of storytelling, not of history. Women have been contributing to every field, however invisibly, since the beginning of time.
       </p>
       <p>
-        Scroll to explore and read about their accomplishments.
+        One Amongst Many attempts to illuminate the histories of women in computing that have been diminished or erased. It is a data installation where each woman is arranged in a field by the year of her greatest achievement, and the height of the orb correlated to her renown. Every orb starts dimmed, and gets brighter each time another person reads about them, literally shedding light on the woman’s accomplishments.
       </p>
-      ↓
     </div>
     <div class='subsection' :style='{opacity: legendOpacity}'>
       <p>
-        In this digital counterpart, the women are positioned by the year of their accomplishment, and their heights are the level of their renown.
+        One Amongst Many is a physical data visualization created at New York University’s ITP Master’s program. The original installation consisted of 16-20 illuminated orbs suspended from the ceiling, each with a woman’s biography inside. This website is a digital analog to the installation, so that people around the world can learn about these incredible women in computing.
       </p>
     </div>
+    <div class='arrow'>⌄</div>
   </div>
 </template>
 
@@ -68,12 +71,24 @@ export default {
   height: 100vh;
 }
 
+.title {
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
+}
+
+.byline {
+  font-size: 0.85em;
+  text-align: center;
+}
+
 .subsection {
   position: absolute;
   top: 40vh;
   left: 50vw;
   width: 600px;
   transform: translate(-50%, -50%);
+  text-align: justify;
 }
 
 .videos {
@@ -105,5 +120,21 @@ export default {
   background-image: url(https://storage.googleapis.com/one-amongst-many-v2/bg-pattern.png);
   opacity: .3;
   pointer-events: none;
+}
+
+.arrow {
+  position: absolute;
+  bottom: 80px;
+  left: 50vw;
+  transform: translate(-50%, 0);
+  font-size: 3em;
+  animation: bounce 1.5s ease-in-out infinite;
+}
+
+
+@keyframes bounce {
+  0%  { transform: translateY(0)   }
+  50% { transform: translateY(-20px)}
+  100% { transform: translateY(0)   }
 }
 </style>
