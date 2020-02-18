@@ -84,7 +84,6 @@ export default {
     this.createBackground()
     this.createStars()
     this.draw()
-    this.loop.start()
   },
   destroyed() {
     this.loop.stop().removeAllListeners()
@@ -107,6 +106,8 @@ export default {
   },
   methods: {
     draw() {
+      if (!this.orbs.length) return
+
       const elapsed = this.clock.getElapsedTime()
       this.drawCircles(elapsed)
 
@@ -213,10 +214,12 @@ export default {
     },
     createTimeline() {
       if (!this.orbs.length) return
-
+      
       // fade the world in
       this.tl0.set(this.$data, {display: 'block'}, 2.5)
       this.tl0.to(this.$data, {opacity: 1, duration: 1.5}, 2.5)
+      this.tl0.add(() => this.loop.stop(), 3)
+      this.tl0.add(() => this.loop.start(), 3.01)
 
       // timeline
       _.each(this.orbs, ({mesh, x, y, z}, i) => {

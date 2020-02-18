@@ -34,7 +34,7 @@ export default {
   name: 'app',
   components: {World, Intro, Infobox},
   data() {
-    const sectionHeights = [docHeight * 0.2, docHeight * 0.79, docHeight * 0.01]
+    const sectionHeights = [docHeight * 0.2, docHeight * 0.8]
     return {
       width: window.innerWidth,
       height: window.innerHeight,
@@ -50,22 +50,15 @@ export default {
           top: sectionHeights[0],
           bottom: sectionHeights[0] + sectionHeights[1],
         },
-        {
-          index: 2,
-          height: sectionHeights[2],
-          top: sectionHeights[0] + sectionHeights[1],
-          bottom: sectionHeights[0] + sectionHeights[1] + sectionHeights[2],
-        },
       ],
       // timelines
       timelines: [
         new gsap.timeline({paused: true}),
         new gsap.timeline({paused: true}),
-        new gsap.timeline({paused: true}),
       ],
     }
   },
-  mounted() {
+  created() {
     const yScale = d3.scaleLinear()
       .domain(d3.extent(filtered, d => d.backlinks)).range([-1, 2])
     const zScale = d3.scaleLinear()
@@ -87,10 +80,12 @@ export default {
         x, y: height, z: y,
       })
     })
-
+  },
+  mounted() {
     // scroll
     window.addEventListener('scroll', this.handleScroll)
     window.addEventListener('resize', this.handleWindowResize)
+
     this.handleScroll()
   },
   destroyed() {
@@ -107,12 +102,6 @@ export default {
 
       if (index > 0) {
         this.timelines[0].progress(1)
-      }
-      if (index > 1) {
-        this.timelines[1].progress(1)
-      }
-      if (index < 2) {
-        this.timelines[2].progress(0)
       }
       if (index < 1) {
         this.timelines[1].progress(0)
