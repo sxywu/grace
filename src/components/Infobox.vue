@@ -1,12 +1,30 @@
 <template>
-  <div id="infobox" :style='{opacity}'>
-    <div :style='{opacity: bioOpacity}'>
+  <div :style='{opacity}'>
+    <div class='infobox' :style='{opacity: bioOpacity}'>
       <div class='year'><strong>{{ parseInt(year) }}</strong></div>
       <div class='title'>{{ name }}</div>
       <div class='fields'><em>{{ fields }}</em></div>
       <div>{{ shortSummary }}</div>
       <p>
         <a :src='url' target='_new'>read more</a> →
+      </p>
+    </div>
+    <div class='outro' :style='{opacity: outroOpacity}'>
+      <p>
+        Read more about One Amongst Many here:<br />
+        <a href='http://www.cdacanay.com/itp-blog/2019/12/23/one-amongst-many-connecting-womxn-in-computing' target='_new'>
+          Christina's design-centric recounting
+        </a><br />
+        <a href='https://tina.pizza/one-amongst-many' target='_new'>
+          Tina's physical computing story
+        </a><br />
+        <a href='http://www.datasketch.es/june/' target='_new'>
+          Shirley's data visualization write-up
+        </a>
+      </p>
+
+      <p style='font-size: 0.85em'>
+        <em>Made with love in Brooklyn, 2019.</em>
       </p>
     </div>
   </div>
@@ -27,6 +45,7 @@ export default {
       shortSummary: '',
       opacity: 0,
       bioOpacity: 0,
+      outroOpacity: 0,
       url: '',
     }
   },
@@ -62,14 +81,16 @@ export default {
         this.tl.to(this.$data, {bioOpacity: 1, duration: bioDuration}, i + 0.5)
       })
 
-      this.tl.to(this.$data, {opacity: 0}, this.orbs.length)
+      this.tl.to(this.$data, {bioOpacity: 0}, this.orbs.length)
+
+      this.tl.to(this.$data, {outroOpacity: 1}, this.orbs.length + 0.5)
     },
   }
 }
 </script>
 
 <style scoped>
-#infobox {
+.infobox {
   position: absolute;
   top: 50vh;
   left: 50vw;
@@ -86,7 +107,6 @@ export default {
 
 .fields {
   font-size: 0.85em;
-  white-space: nowrap;
 }
 
 .year {
@@ -94,5 +114,14 @@ export default {
   font-size: 1.25em;
   font-weight: bold;
   border-bottom: 1px solid;
+}
+
+.outro {
+  position: absolute;
+  top: 50vh;
+  left: 50vw;
+  width: 600px;
+  transform: translate(-50%, -50%);
+  text-align: center;
 }
 </style>
