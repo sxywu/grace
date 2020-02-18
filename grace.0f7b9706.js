@@ -1062,4 +1062,4 @@ var e,t=arguments[3],n=require("buffer").Buffer,a=require("process");!function(n
 },{"lodash":"4HJa","d3":"BG5c","gsap":"f8Z0","../data/20names.json":"4M3N","./components/World.vue":"NuCU","./components/Intro.vue":"EL2m","./components/Infobox.vue":"IKlI"}],"Focm":[function(require,module,exports) {
 "use strict";var e=r(require("vue")),u=r(require("./src/App.vue"));function r(e){return e&&e.__esModule?e:{default:e}}e.default.config.productionTip=!1,new e.default({render:function(e){return e(u.default)}}).$mount("#app");
 },{"vue":"4673","./src/App.vue":"6plK"}]},{},["Focm"], null)
-//# sourceMappingURL=/grace/grace.0f7b9706.js.map
+//# sourceMappingURL=/grace.0f7b9706.js.map
