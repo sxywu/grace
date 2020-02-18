@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "parcel index.html",
-    "predeploy": "rm -rf dist && parcel build index.html --public-url /grace",
+    "predeploy": "rm -rf dist && parcel build index.html --public-url /",
     "deploy": "gh-pages -d dist"
   },
   "keywords": [],
