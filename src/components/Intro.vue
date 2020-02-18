@@ -125,16 +125,29 @@ export default {
 .arrow {
   position: absolute;
   bottom: 80px;
-  left: 50vw;
-  transform: translate(-50%, 0);
+  width: 100vw;
+  text-align: center;
   font-size: 3em;
   animation: bounce 1.5s ease-in-out infinite;
 }
-
 
 @keyframes bounce {
   0%  { transform: translateY(0)   }
   50% { transform: translateY(-20px)}
   100% { transform: translateY(0)   }
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .subsection {
+    top: 45vh;
+    left: 0px;
+    width: calc(100% - 40px);
+    padding: 20px 20px 20px 20px;
+    transform: translate(0%, -50%);
+  }
+
+  .arrow {
+    bottom: 10px;
+  }
 }
 </style>
