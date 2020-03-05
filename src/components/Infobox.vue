@@ -11,7 +11,10 @@
     </div>
     <div class='outro' :style='{opacity: outroOpacity}'>
       <p>
-        Read more about One Amongst Many here:<br />
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/bEM0CRdCrQo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </p>
+      <p>
+        <strong>Read more about One Amongst Many here:</strong><br />
         <a href='http://www.cdacanay.com/itp-blog/2019/12/23/one-amongst-many-connecting-womxn-in-computing' target='_new'>
           Christina's design-centric recounting
         </a><br />
