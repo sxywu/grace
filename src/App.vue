@@ -28,7 +28,7 @@ import World from './components/World.vue'
 import Intro from './components/Intro.vue'
 import Infobox from './components/Infobox.vue'
 
-const docHeight = 30000
+const docHeight = isMobile.phone ? 10000 : 30000
 
 export default {
   name: 'app',
