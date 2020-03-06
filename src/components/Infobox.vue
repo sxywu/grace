@@ -11,7 +11,10 @@
     </div>
     <div class='outro' v-if='outroOpacity' :style='{opacity: outroOpacity}'>
       <p>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/bEM0CRdCrQo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe :width='isPhone ? 340 : 854' :height='isPhone ? 240 : 480'
+          src="https://www.youtube.com/embed/bEM0CRdCrQo" frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
       </p>
       <p>
         <strong>Read more about One Amongst Many here:</strong><br />
@@ -50,6 +53,7 @@ export default {
       bioOpacity: 0,
       outroOpacity: 0,
       url: '',
+      isPhone: isMobile.phone,
     }
   },
   mounted() {
@@ -123,7 +127,7 @@ export default {
   position: absolute;
   top: 50vh;
   left: 50vw;
-  width: 600px;
+  width: min-content;
   transform: translate(-50%, -50%);
   text-align: center;
 }
