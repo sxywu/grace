@@ -1,15 +1,15 @@
 <template>
   <div :style='{opacity}'>
-    <div class='infobox' :style='{opacity: bioOpacity}'>
+    <div class='infobox' v-if='bioOpacity' :style='{opacity: bioOpacity}'>
       <div class='year'><strong>{{ parseInt(year) }}</strong></div>
       <div class='title'>{{ name }}</div>
       <div class='fields'><em>{{ fields }}</em></div>
       <div>{{ shortSummary }}</div>
       <p>
-        <a :src='url' target='_new'>read more</a> →
+        <a :href='url' target='_new'>read more</a> →
       </p>
     </div>
-    <div class='outro' :style='{opacity: outroOpacity}'>
+    <div class='outro' v-if='outroOpacity' :style='{opacity: outroOpacity}'>
       <p>
         <iframe width="560" height="315" src="https://www.youtube.com/embed/bEM0CRdCrQo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </p>

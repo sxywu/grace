@@ -214,7 +214,7 @@ export default {
     },
     createTimeline() {
       if (!this.orbs.length) return
-      
+
       // fade the world in
       this.tl0.set(this.$data, {display: 'block'}, 2.5)
       this.tl0.to(this.$data, {opacity: 1, duration: 1.5}, 2.5)

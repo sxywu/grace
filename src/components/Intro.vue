@@ -1,5 +1,5 @@
 <template>
-  <div id="intro" :style='{display, opacity}'>
+  <div id="intro" v-if='opacity' :style='{opacity}'>
     <div class='videos'>
       <video src='https://storage.googleapis.com/one-amongst-many-v2/timelapse_reduced.mp4'
          :style='{opacity: timelapseOpacity}' preload autoplay loop muted playsinline></video>
@@ -37,7 +37,6 @@ export default {
   props: ['tl', 'width', 'height'],
   data() {
     return {
-      display: 'block',
       opacity: 1,
       scrollOpacity: 1,
       legendOpacity: 0,
@@ -53,7 +52,6 @@ export default {
     this.tl.to(this.$data, {fancyOpacity: 0, legendOpacity: 1, timelapseOpacity: 1}, 1.5)
     // 3. fade out legend
     this.tl.to(this.$data, {legendOpacity: 0, timelapseOpacity: 0, opacity: 0, duration: 1.5}, 2.5)
-    this.tl.set(this.$data, {display: 'none'}, 4)
   },
   watch: {
   },
